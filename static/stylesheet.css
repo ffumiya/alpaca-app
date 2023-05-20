@@ -54,8 +54,9 @@ header, footer {
 }
 
 .animal-img {
-    width: 200px;
-    height: 200px;
+    width: 100%; /* Changed width to be 100% */
+    max-width: 200px; /* Limited the maximum width to 200px */
+    height: auto; /* Changed height to auto to maintain aspect ratio */
     margin: 0 1rem;
     object-fit: cover;
 }
