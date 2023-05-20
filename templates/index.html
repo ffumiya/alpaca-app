@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="img/x-icon" href="../static/favicon.jpeg">
+    <title>Animal Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
+    <style>
+        .file-selection {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .selected-file {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <p class="header-title">Animal Classifier｜アルパカかヒツジかAIが判定！</p>
+    </header>
+
+    <div class="wrapper">
+        <h2 class="wrapper-title">AIが送信された画像をアルパカかヒツジか判別します</h2>
+        <div class="animal-images">
+            <img class="animal-img" src="{{ url_for('static', filename='alpaca_background.jpeg') }}" alt="アルパカの画像">
+            <img class="animal-img" src="{{ url_for('static', filename='sheep_background.jpeg') }}" alt="ヒツジの画像">
+        </div>
+        <p class="wrapper-comment">ファイルを選択してください</p>
+        <form method="POST" enctype="multipart/form-data">
+            <label for="file-upload" class="custom-file-upload">
+                ファイルを選択
+            </label>
+            <input id="file-upload" type="file" name="file" style="display:none;" onchange="showFileName(this)">
+            <div class="selected-file" id="selected-file"></div>
+
+            <input id="file-upload" type="file" name="file" style="display:none;">
+            <input class="btn" value="AIが判定！" type="submit">
+        </form>
+        <div class="answer">{% if answer %}{{answer}}{% endif %}</div>
+        <div class="up_img">
+            {% if filepath %}
+            <img class="filepath" src="{{ url_for('static', filename=filepath) }}" height="200">
+            {% endif %}
+        </div>
+    </div>
+
+    <footer>
+        <small class="last-text">『アルパカとヒツジの判別器をWebアプリにしてみた！』より</small>
+    </footer>
+
+    <script>
+        function showFileName(input) {
+            const file = input.files[0];
+            const fileName = file.name;
+            document.getElementById('selected-file').textContent = fileName;
+        }
+    </script>
+</body>
+</html>
